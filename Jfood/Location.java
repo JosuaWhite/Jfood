@@ -2,9 +2,9 @@
 public class Location
 {
 
-    private String province;
-    private String description;
-    private String city;
+    public String province;
+    public String description;
+    public String city;
 
 
     public Location(String city, String province, String description)

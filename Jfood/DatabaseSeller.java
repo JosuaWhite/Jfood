@@ -3,23 +3,15 @@ public class DatabaseSeller
 
     private String[] listSeller;
     private Seller wat;
-
-
-    public DatabaseSeller()
-    {
-        this.listSeller = listSeller;
-        this.wat = wat;
-        
-    }
     
     public boolean addSeller(Seller seller)
     {
-        return true;
+        return false;
     }
     
     public boolean removeSeller(Seller seller)
     {
-        return true;
+        return false;
     }
     
     public Seller getSeller()
@@ -27,7 +19,7 @@ public class DatabaseSeller
         return wat;
     }
     
-    public String[] getListFood()
+    public String[] getListSeller()
     {
         return listSeller;
     }

@@ -3,23 +3,15 @@ public class DatabaseFood
 
     private String[] listFood;
     private Food sek;
-
-
-    public DatabaseFood()
-    {
-        this.listFood = listFood;
-        this.sek = sek;
-        
-    }
     
-    public boolean addfood(Food food)
+    public  boolean addfood(Food food)
     {
-        return true;
+        return false;
     }
     
     public boolean removefood(Food food)
     {
-        return true;
+        return false;
     }
     
     public Food getFood()

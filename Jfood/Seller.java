@@ -1,11 +1,11 @@
 public class Seller
 {
 
-    private int id;
-    private String name;
-    private String email;
-    private String phoneNumber;
-    private Location location;
+    public int id;
+    public String name;
+    public String email;
+    public String phoneNumber;
+    public Location location;
 
     public Seller(int id, String name, String email, String phoneNumber, Location location)
     {
