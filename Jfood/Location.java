@@ -1,4 +1,3 @@
-
 public class Location
 {
 
@@ -45,8 +44,12 @@ public class Location
         this.description = description;
     }
     
-    public void printData()
-    {
-        System.out.println("Provinsi : "+province);
+        public String toString()
+    {    
+        return (
+        "Province    : "+province+"\n"+
+        "City        : "+city+"\n"+
+        "Description : "+description+"\n"
+        );
     }
 }

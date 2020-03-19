@@ -48,7 +48,7 @@ public class Promo
         this.id = id;
     }
             
-    public void seCode(String code)
+    public void setCode(String code)
     {
         this.code = code;
     }
@@ -68,14 +68,16 @@ public class Promo
         this.active = active;
     }
     
-    public void printData()
-    {
-        System.out.println("===============PROMO===============");
-        System.out.println("ID        : "+id);
-        System.out.println("Code      : "+code);
-        System.out.println("Discount  : "+discount);
-        System.out.println("Harga min : "+minPrice);
-        System.out.println("Status    : "+active);
-
+        public String toString()
+    {    
+        return (
+        "ID           : "+id+"\n"+
+        "Code         : "+code+"\n"+
+        "Discount     : "+discount+"\n"+
+        "MinPrice     : "+minPrice+"\n"+
+        "ActiveStatus : "+active+"\n"
+        );
     }
+    
+    
 }

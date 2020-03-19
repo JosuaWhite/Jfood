@@ -10,8 +10,8 @@ public class JFood
         Food Food2 = new Food(104,"Sushi",Sell1,28000,FoodCategory.Japanese);
         
         
-        Customer Cust1 = new Customer(2851,"Budi","Budimail@gmail.com","Budi123","20200402");
-        Customer Cust2 = new Customer(1234,"Jorgi","Jorgihandsome@gmail.com","jorgi122","20200610");
+        Customer Cust1 = new Customer(2851,"Budi","Budimail@gmail.com","Budi123",2020,04,02);
+        Customer Cust2 = new Customer(1234,"Jorgi","Jorgihandsome@gmail.com","jorgi122",2020,06,10);
         
         Promo Prom1 = new Promo(107,"Berkah2020",3000,10000,true);
         

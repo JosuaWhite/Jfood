@@ -67,8 +67,14 @@ public class Seller
         this.location = location;
     }
     
-    public void printData()
-    {
-        System.out.println("Nama penjual : "+name);
-    }
+    public String toString()
+    {    
+        return (
+        "ID          : "+id+"\n"+
+        "Nama        : "+name+"\n"+
+        "Phonenumber : "+phoneNumber+"\n"+
+        "Location    : "+location.getCity()+"\n"
+        );
+    }    
+    
 }
