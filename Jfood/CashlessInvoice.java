@@ -1,17 +1,20 @@
+import java.util.*;
+import java.text.SimpleDateFormat;
+
 public class CashlessInvoice extends Invoice
 {
 
     private static final PaymentType PAYMENT_TYPE = PaymentType.Cashless;
     private Promo promo;
 
-    public CashlessInvoice(int id, Food food, String date, Customer customer, InvoiceStatus invoiceStatus)
+    public CashlessInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus)
     {
-        super(id, food, date, customer, invoiceStatus);
+        super(id, food, customer, invoiceStatus);
     }
     
-    public CashlessInvoice(int id, Food food, String date, Customer customer, InvoiceStatus invoiceStatus, Promo promo)
+    public CashlessInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus, Promo promo)
     {
-        super(id, food, date, customer, invoiceStatus);
+        super(id, food,customer, invoiceStatus);
         this.promo = promo;
     }
     
@@ -42,34 +45,42 @@ public class CashlessInvoice extends Invoice
         }
     }
     
-    public void printData()
+    
+    public String toString()
     {
-        System.out.println("===============INVOICE===============");
-        System.out.println("ID       : "+super.getid());
-        System.out.println("Makanan  : "+super.getFood().getName());
-        System.out.println("Harga    : "+super.getFood().getPrice());
-        System.out.println("Tanggal  : "+super.getDate());
-        System.out.println("Customer : "+super.getCustomer().getName());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+        String date = sdf.format(getDate().getTime());
+        
         setTotalPrice();
-        if (promo != null)
+        if (promo!=null&&getPromo().getActive()==true&&super.getFood().getPrice() >= promo.getMinPrice())
         {
-            System.out.println("Promo    : "+promo.getCode());
-            System.out.println("Active   : "+promo.getActive());
-            if (promo.getActive()==true)
-            {
-                if (super.getFood().getPrice() >= promo.getMinPrice())
-                {
-                    System.out.println("Discount : "+promo.getDiscount());
-                }
-                else
-                {
-                    System.out.println("Discount : Belum mencapai harga minimum");
-                }
-            }
-        }
-        System.out.println("Total    : "+totalPrice);
-        System.out.println("Status   : "+super.getInvoiceStatus().toString());
-        System.out.println("Pay Type : "+PAYMENT_TYPE.toString());
+        return(
+        "===============INVOICE===============\n"+
+        "ID             : "+super.getid()+"\n"+
+        "Makanan        : "+super.getFood().getName()+"\n"+
+        "Harga          : "+super.getFood().getPrice()+"\n"+
+        "Tanggal        : "+date+"\n"+
+        "Customer       : "+super.getCustomer().getName()+"\n"+
+        "Promo          : "+promo.getCode()+"\n"+
+        "Total          : "+totalPrice+"\n"+
+        "Status         : "+super.getInvoiceStatus().toString()+"\n"+
+        "Pay Type       : "+PAYMENT_TYPE.toString()+"\n"
+        );
+    }
+    else
+    {
+        return(
+        "===============INVOICE===============\n"+
+        "ID             : "+super.getid()+"\n"+
+        "Makanan        : "+super.getFood().getName()+"\n"+
+        "Harga          : "+super.getFood().getPrice()+"\n"+
+        "Tanggal        : "+date+"\n"+
+        "Customer       : "+super.getCustomer().getName()+"\n"+
+        "Total          : "+totalPrice+"\n"+
+        "Status         : "+super.getInvoiceStatus().toString()+"\n"+
+        "Pay Type       : "+PAYMENT_TYPE.toString()+"\n"
+        );
+    }
     }
 
 }

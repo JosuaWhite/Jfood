@@ -15,15 +15,9 @@ public class JFood
         
         Promo Prom1 = new Promo(107,"Berkah2020",3000,10000,true);
         
-        CashlessInvoice Cashiv1 = new CashlessInvoice(103,Food1,"6 Maret 2020",Cust1,InvoiceStatus.Finished,Prom1);
         
         
-        CashInvoice Cashiv2 = new CashInvoice(103,Food1,"6 Maret 2020",Cust1,InvoiceStatus.Finished);
-        CashInvoice Cashiv3 = new CashInvoice(103,Food2,"10 Feb 2020",Cust2,InvoiceStatus.Finished,5000);
         
-        
-        Cashiv2.printData();
-        Cashiv3.printData();
     }
     
     

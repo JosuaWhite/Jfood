@@ -1,3 +1,6 @@
+import java.util.*;
+import java.text.SimpleDateFormat;
+
 public class CashInvoice extends Invoice
 {
 
@@ -5,14 +8,14 @@ public class CashInvoice extends Invoice
     private Promo promo;
     private int deliveryFee = 0;
 
-    public CashInvoice(int id, Food food, String date, Customer customer, InvoiceStatus invoiceStatus)
+    public CashInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus)
     {
-        super(id, food, date, customer, invoiceStatus);
+        super(id, food, customer, invoiceStatus);
     }
     
-    public CashInvoice(int id, Food food, String date, Customer customer, InvoiceStatus invoiceStatus, int deliveryFee)
+    public CashInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus, int deliveryFee)
     {
-        super(id, food, date, customer, invoiceStatus);
+        super(id, food, customer, invoiceStatus);
         this.deliveryFee = deliveryFee;
     }
     
@@ -43,22 +46,41 @@ public class CashInvoice extends Invoice
         }
     }
     
-    public void printData()
+    public String toString()
     {
-        System.out.println("===============INVOICE===============");
-        System.out.println("ID             : "+super.getid());
-        System.out.println("Makanan        : "+super.getFood().getName());
-        System.out.println("Harga          : "+super.getFood().getPrice());
-        System.out.println("Tanggal        : "+super.getDate());
-        System.out.println("Customer       : "+super.getCustomer().getName());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+        String date = sdf.format(getDate().getTime());
+        
         setTotalPrice();
-        if (deliveryFee != 0)
+        if (deliveryFee!=0)
         {
-            System.out.println("Biaya antar    : "+deliveryFee);
-        }
-        System.out.println("Total          : "+totalPrice);
-        System.out.println("Status         : "+super.getInvoiceStatus().toString());
-        System.out.println("Pay Type       : "+PAYMENT_TYPE.toString());
+        return(
+        "===============INVOICE===============\n"+
+        "ID             : "+super.getid()+"\n"+
+        "Makanan        : "+super.getFood().getName()+"\n"+
+        "Harga          : "+super.getFood().getPrice()+"\n"+
+        "Tanggal        : "+date+"\n"+
+        "Customer       : "+super.getCustomer().getName()+"\n"+
+        "Biaya antar    : "+deliveryFee+"\n"+
+        "Total          : "+totalPrice+"\n"+
+        "Status         : "+super.getInvoiceStatus().toString()+"\n"+
+        "Pay Type       : "+PAYMENT_TYPE.toString()+"\n"
+        );
+    }
+    else
+    {
+        return(
+        "===============INVOICE===============\n"+
+        "ID             : "+super.getid()+"\n"+
+        "Makanan        : "+super.getFood().getName()+"\n"+
+        "Harga          : "+super.getFood().getPrice()+"\n"+
+        "Tanggal        : "+date+"\n"+
+        "Customer       : "+super.getCustomer().getName()+"\n"+
+        "Total          : "+totalPrice+"\n"+
+        "Status         : "+super.getInvoiceStatus().toString()+"\n"+
+        "Pay Type       : "+PAYMENT_TYPE.toString()+"\n"
+        );
+    }
     }
 
 }

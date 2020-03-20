@@ -1,20 +1,24 @@
+import java.util.*;
+import java.text.SimpleDateFormat;
+
 public abstract class Invoice
 {
 
     private int id;
     private Food food;
-    private String date;
+    private Calendar date;
     protected int totalPrice;
     private Customer customer;
     private InvoiceStatus invoicestatus;
 
-    public Invoice(int id, Food food, String date, Customer customer, InvoiceStatus invoicestatus)
-    {
+    public Invoice(int id, Food food, Customer customer, InvoiceStatus invoicestatus)
+    {   
         this.id = id;
         this.food = food;
-        this.date = date;
         this.customer = customer;
         this.invoicestatus = invoicestatus;
+        this.date = Calendar.getInstance();
+        
 
     }
     
@@ -28,7 +32,7 @@ public abstract class Invoice
         return food;
     }
         
-    public String getDate()
+    public Calendar getDate()
     {
         return date;
     }
@@ -60,9 +64,15 @@ public abstract class Invoice
         this.food = food;
     }
             
-    public void setDate(String date)
+    public Calendar setDate(Calendar date)
     {
-        this.date = date;
+        return date;
+    }
+    
+    public Calendar setDate(int year, int month, int day)
+    {
+        date = new GregorianCalendar(year,month,day);
+        return date;
     }
             
     public abstract void setTotalPrice();
@@ -77,6 +87,6 @@ public abstract class Invoice
         this.invoicestatus = invoicestatus;
     }
     
-    public abstract void printData();
+    public abstract String toString();
     
 }

@@ -60,7 +60,7 @@ public class Customer
         return password;
     }
         
-    public Calendar JoinDate()
+    public Calendar getJoinDate()
     {
         return joinDate;
     }
@@ -115,15 +115,27 @@ public class Customer
     
     public String toString()
     {
-        SimpleDateFormat format1 = new SimpleDateFormat("dd MMMM yyyy");
-        String tanggal = format1.format(joinDate);            
-        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");            
+        if(joinDate!=null)
+        {
         return (
+        "==========CUSTOMER==========\n"+
         "ID        : "+id+"\n"+
         "Nama      : "+name+"\n"+
         "Email     : "+email+"\n"+
         "Password  : "+password+"\n"+
-        "Join date : "+tanggal+"\n"
+        "Join date : "+sdf.format(getJoinDate().getTime())+"\n"
         );
+    }
+    else
+    {
+        return(
+        "==========CUSTOMER==========\n"+
+        "ID        : "+id+"\n"+
+        "Nama      : "+name+"\n"+
+        "Email     : "+email+"\n"+
+        "Password  : "+password+"\n"
+        );
+    }
     }
 }

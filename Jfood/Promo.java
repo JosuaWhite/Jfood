@@ -71,6 +71,7 @@ public class Promo
         public String toString()
     {    
         return (
+        "==========PROMO==========\n"+
         "ID           : "+id+"\n"+
         "Code         : "+code+"\n"+
         "Discount     : "+discount+"\n"+

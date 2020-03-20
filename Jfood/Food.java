@@ -72,6 +72,7 @@ public class Food
     public String toString()
     {    
         return (
+        "==========FOOD==========\n"+
         "ID       : "+id+"\n"+
         "Nama     : "+name+"\n"+
         "Seller   : "+seller.getName()+"\n"+

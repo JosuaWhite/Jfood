@@ -70,6 +70,7 @@ public class Seller
     public String toString()
     {    
         return (
+        "==========SELLER==========\n"+
         "ID          : "+id+"\n"+
         "Nama        : "+name+"\n"+
         "Phonenumber : "+phoneNumber+"\n"+

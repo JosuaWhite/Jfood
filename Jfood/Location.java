@@ -47,6 +47,7 @@ public class Location
         public String toString()
     {    
         return (
+        "==========LOCATION==========\n"+
         "Province    : "+province+"\n"+
         "City        : "+city+"\n"+
         "Description : "+description+"\n"
