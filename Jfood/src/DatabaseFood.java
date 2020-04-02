@@ -1,27 +1,68 @@
+import java.util.*;
+
 public class DatabaseFood
 {
 
-    private String[] listFood;
-    private Food sek;
-    
-    public  boolean addfood(Food food)
+    public ArrayList<Food> FOOD_DATABASE;
+    public int lastId = 0;
+
+    public ArrayList<Food> getFoodDatabase()
     {
-        return false;
+        return FOOD_DATABASE;
     }
-    
-    public boolean removefood(Food food)
+
+    public int getLastId()
     {
-        return false;
+        return lastId;
     }
-    
-    public Food getFood()
+
+    public Food getFoodById(int id)
     {
-        return sek;
+        if (FOOD_DATABASE.get(id)!=null) {
+            return FOOD_DATABASE.get(id);
+        }
+        else
+        {
+            return null;
+        }
     }
-    
-    public String[] getListFood()
+
+    public ArrayList<Food> getFoodBySeller(int SellerId)
     {
-        return listFood;
+        ArrayList<Food> list = new ArrayList<>();
+        for (Food food : FOOD_DATABASE) {
+            if (food.getSeller().getId() == SellerId)
+            {
+                list.add(food);
+            }
+        }
+        return list;
     }
-    
+
+    public ArrayList<Food> getFoodByCategory(FoodCategory foodCategory)
+    {
+        ArrayList<Food> list = new ArrayList<>();
+        for (Food food : FOOD_DATABASE) {
+            if (food.getCategory() == foodCategory)
+            {
+                list.add(food);
+            }
+        }
+        return list;
+    }
+
+    public boolean addSeller(Food food)
+    {
+        FOOD_DATABASE.add(lastId,food);
+        lastId++;
+        return true;
+    }
+
+    public boolean removeSeller(int id)
+    {
+        FOOD_DATABASE.remove(id);
+        lastId--;
+        return true;
+    }
+
 }

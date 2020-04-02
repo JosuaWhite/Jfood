@@ -17,7 +17,7 @@ public class Seller
         
     }
     
-    public int getid()
+    public int getId()
     {
         return id;
     }

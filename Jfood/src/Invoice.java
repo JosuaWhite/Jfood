@@ -5,18 +5,17 @@ public abstract class Invoice
 {
 
     private int id;
-    private Food food;
+    private ArrayList<Food> foods;
     private Calendar date;
     protected int totalPrice;
     private Customer customer;
     private InvoiceStatus invoicestatus;
 
-    public Invoice(int id, Food food, Customer customer, InvoiceStatus invoicestatus)
+    public Invoice(int id, ArrayList<Food> foods, Customer customer)
     {   
         this.id = id;
-        this.food = food;
+        this.foods = foods;
         this.customer = customer;
-        this.invoicestatus = invoicestatus;
         this.date = Calendar.getInstance();
         
 
@@ -27,9 +26,9 @@ public abstract class Invoice
         return id;
     }
     
-    public Food getFood()
+    public ArrayList<Food> getFoods()
     {
-        return food;
+        return foods;
     }
         
     public Calendar getDate()
@@ -59,9 +58,9 @@ public abstract class Invoice
         this.id = id;
     }
             
-    public void setFood(Food food)
+    public void setFoods(ArrayList<Food> foods)
     {
-        this.food = food;
+        this.foods = foods;
     }
             
     public Calendar setDate(Calendar date)

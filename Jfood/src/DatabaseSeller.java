@@ -1,27 +1,47 @@
+import java.util.*;
+
 public class DatabaseSeller
 {
+    public ArrayList<Seller> SELLER_DATABASE;
+    public int lastId = 0;
 
-    private String[] listSeller;
-    private Seller wat;
-    
+
+    public DatabaseSeller() {
+    }
+
+    public ArrayList<Seller> getSellerDatabase()
+    {
+        return SELLER_DATABASE;
+    }
+
+    public int getLastId()
+    {
+        return lastId;
+    }
+
+    public Seller getSellerById(int id)
+    {
+        if (SELLER_DATABASE.get(id)!=null) {
+            return SELLER_DATABASE.get(id);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public boolean addSeller(Seller seller)
     {
-        return false;
+        SELLER_DATABASE.add(lastId,seller);
+        lastId++;
+        return true;
     }
-    
-    public boolean removeSeller(Seller seller)
+
+    public boolean removeSeller(int id)
     {
-        return false;
+        SELLER_DATABASE.remove(id);
+        lastId--;
+        return true;
     }
-    
-    public Seller getSeller()
-    {
-        return wat;
-    }
-    
-    public String[] getListSeller()
-    {
-        return listSeller;
-    }
-    
+
 }

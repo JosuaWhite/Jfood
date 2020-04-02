@@ -7,14 +7,14 @@ public class CashlessInvoice extends Invoice
     private static final PaymentType PAYMENT_TYPE = PaymentType.Cashless;
     private Promo promo;
 
-    public CashlessInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus)
+    public CashlessInvoice(int id, ArrayList<Food> foods, Customer customer)
     {
-        super(id, food, customer, invoiceStatus);
+        super(id, foods, customer);
     }
     
-    public CashlessInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus, Promo promo)
+    public CashlessInvoice(int id, ArrayList<Food> foods, Customer customer, Promo promo)
     {
-        super(id, food,customer, invoiceStatus);
+        super(id, foods,customer);
         this.promo = promo;
     }
     
@@ -32,55 +32,48 @@ public class CashlessInvoice extends Invoice
     {
         this.promo = promo;
     }
-    
-    public void setTotalPrice()
-    {
-        if (promo != null && super.getFood().getPrice() >= promo.getMinPrice() && promo.getActive() == true)
-        {
-            super.totalPrice = super.getFood().getPrice() - promo.getDiscount();
+
+
+    public void setTotalPrice() {
+        super.totalPrice = 0;
+        for (Food foods : getFoods()) {
+            super.totalPrice = foods.getPrice();
         }
-        else
-        {
-            super.totalPrice = super.getFood().getPrice();
+
+        if (promo != null && super.totalPrice >= promo.getMinPrice() && promo.getActive() == true) {
+            super.totalPrice -= promo.getDiscount();
         }
+
     }
-    
-    
+
     public String toString()
     {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
         String date = sdf.format(getDate().getTime());
-        
+        StringBuilder sss = new StringBuilder();
+
         setTotalPrice();
-        if (promo!=null&&getPromo().getActive()==true&&super.getFood().getPrice() >= promo.getMinPrice())
+        if (promo != null && super.totalPrice >= promo.getMinPrice() && promo.getActive() == true)
         {
-        return(
-        "===============INVOICE===============\n"+
-        "ID             : "+super.getid()+"\n"+
-        "Makanan        : "+super.getFood().getName()+"\n"+
-        "Harga          : "+super.getFood().getPrice()+"\n"+
-        "Tanggal        : "+date+"\n"+
-        "Customer       : "+super.getCustomer().getName()+"\n"+
-        "Promo          : "+promo.getCode()+"\n"+
-        "Total          : "+totalPrice+"\n"+
-        "Status         : "+super.getInvoiceStatus().toString()+"\n"+
-        "Pay Type       : "+PAYMENT_TYPE.toString()+"\n"
-        );
+            sss.append("===============INVOICE===============\n" + "ID             : ").append(super.getid()).append("\n").append("Makanan        : \n");
+
+            for (Food foods : getFoods()) {
+                sss.append(foods.getName()).append(" ").append(foods.getPrice()).append("\n");
+            }
+            sss.append("Tanggal        : ").append(date).append("\n").append("Customer       : ").append(super.getCustomer().getName()).append("\n").append("Promo code     : ").append(promo.getCode()).append("\n").append("Diskon         : ").append(promo.getDiscount()).append("\n").append("Total          : ").append(totalPrice).append("\n").append("Status         : ").append(super.getInvoiceStatus().toString()).append("\n").append("Pay Type       : ").append(PAYMENT_TYPE.toString()).append("\n");
+            return sss.toString();
+        }
+        else
+        {
+            sss.append("===============INVOICE===============\n" + "ID             : ").append(super.getid()).append("\n").append("Makanan        : \n");
+
+            for (Food foods : getFoods()) {
+                sss.append(foods.getName()).append(" ").append(foods.getPrice()).append("\n");
+            }
+            sss.append("Tanggal        : ").append(date).append("\n").append("Customer       : ").append(super.getCustomer().getName()).append("\n").append("Total          : ").append(totalPrice).append("\n").append("Status         : ").append(super.getInvoiceStatus().toString()).append("\n").append("Pay Type       : ").append(PAYMENT_TYPE.toString()).append("\n");
+            return sss.toString();
+        }
     }
-    else
-    {
-        return(
-        "===============INVOICE===============\n"+
-        "ID             : "+super.getid()+"\n"+
-        "Makanan        : "+super.getFood().getName()+"\n"+
-        "Harga          : "+super.getFood().getPrice()+"\n"+
-        "Tanggal        : "+date+"\n"+
-        "Customer       : "+super.getCustomer().getName()+"\n"+
-        "Total          : "+totalPrice+"\n"+
-        "Status         : "+super.getInvoiceStatus().toString()+"\n"+
-        "Pay Type       : "+PAYMENT_TYPE.toString()+"\n"
-        );
-    }
-    }
+
 
 }
