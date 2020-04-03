@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2fa748eb-5a21-4ed4-91ae-98046d75ccfa" name="Default Changelist" comment="" />
+    <list default="true" id="2fa748eb-5a21-4ed4-91ae-98046d75ccfa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/DatabaseInvoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DatabaseFood.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DatabaseFood.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DatabasePromo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DatabasePromo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Invoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JFood.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JFood.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -38,5 +52,9 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="574" y="148" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1585821732417" />
+    <state x="465" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1585916210829">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="465" y="256" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1585916210829" />
   </component>
 </project>

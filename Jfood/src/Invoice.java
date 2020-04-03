@@ -21,7 +21,7 @@ public abstract class Invoice
 
     }
     
-    public int getid()
+    public int getId()
     {
         return id;
     }

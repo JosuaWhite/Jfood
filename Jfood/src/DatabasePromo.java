@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public class DatabasePromo
 {
 
-    public ArrayList<Promo> PROMO_DATABASE;
-    public int lastId = 0;
+    public static ArrayList<Promo> PROMO_DATABASE;
+    public static int lastId = 0;
 
 
     public DatabasePromo() {
@@ -43,7 +43,7 @@ public class DatabasePromo
         return list;
     }
 
-    public boolean addPromo(Promo promo)
+    public static boolean addPromo(Promo promo)
     {
         PROMO_DATABASE.add(lastId,promo);
         lastId++;

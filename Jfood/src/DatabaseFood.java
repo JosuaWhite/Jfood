@@ -3,8 +3,8 @@ import java.util.*;
 public class DatabaseFood
 {
 
-    public ArrayList<Food> FOOD_DATABASE;
-    public int lastId = 0;
+    public static ArrayList<Food> FOOD_DATABASE;
+    public static int lastId = 0;
 
     public ArrayList<Food> getFoodDatabase()
     {
