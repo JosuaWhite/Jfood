@@ -5,7 +5,6 @@ public class CashInvoice extends Invoice
 {
 
     private static final PaymentType PAYMENT_TYPE = PaymentType.Cash;
-    private Promo promo;
     private int deliveryFee = 0;
 
     public CashInvoice(int id, ArrayList<Food> foods, Customer customer)
@@ -18,7 +17,8 @@ public class CashInvoice extends Invoice
         super(id, foods, customer);
         this.deliveryFee = deliveryFee;
     }
-    
+
+    @Override
     public PaymentType getPaymentType()
     {
         return PAYMENT_TYPE;
@@ -34,46 +34,38 @@ public class CashInvoice extends Invoice
         this.deliveryFee = deliveryFee;
     }
     
-
+    @Override
     public void setTotalPrice() {
         super.totalPrice = 0;
         for (Food foods : getFoods()) {
-            super.totalPrice = foods.getPrice();
+            super.totalPrice += foods.getPrice();
         }
-
         if (deliveryFee != 0) {
             super.totalPrice += deliveryFee;
         }
-
     }
-    
+
+    @Override
     public String toString()
     {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
-        String date = sdf.format(getDate().getTime());
-        StringBuilder sss = new StringBuilder();
-
-        setTotalPrice();
-        if (deliveryFee!=0)
+        String date = sdf.format(super.getDate().getTime());
+        String foods = "";
+        for(Food foodList : getFoods())
         {
-            sss.append("===============INVOICE===============\n" + "ID             : ").append(super.getid()).append("\n").append("Makanan        : \n");
-
-            for (Food foods : getFoods()) {
-                sss.append(foods.getName()).append(" ").append(foods.getPrice()).append("\n");
-            }
-            sss.append("Tanggal        : ").append(date).append("\n").append("Customer       : ").append(super.getCustomer().getName()).append("\n").append("Biaya antar    : ").append(deliveryFee).append("\n").append("Total          : ").append(totalPrice).append("\n").append("Status         : ").append(super.getInvoiceStatus().toString()).append("\n").append("Pay Type       : ").append(PAYMENT_TYPE.toString()).append("\n");
-            return sss.toString();
-    }
-    else
-    {
-        sss.append("===============INVOICE===============\n" + "ID             : ").append(super.getid()).append("\n").append("Makanan        : \n");
-
-        for (Food foods : getFoods()) {
-            sss.append(foods.getName()).append(" ").append(foods.getPrice()).append("\n");
+            foods = foods + foodList.getName() + ", ";
         }
-        sss.append("Tanggal        : ").append(date).append("\n").append("Customer       : ").append(super.getCustomer().getName()).append("\n").append("Total          : ").append(totalPrice).append("\n").append("Status         : ").append(super.getInvoiceStatus().toString()).append("\n").append("Pay Type       : ").append(PAYMENT_TYPE.toString()).append("\n");
-        return sss.toString();
-    }
+        foods = foods.substring(0, foods.length() - 2);
+
+        return "============INVOICE CASH============"+
+                "\nID :" + super.getId()+
+                "\nFoods :"  + foods+
+                "\nDate :" + date+
+                "\nCustomer :" + super.getCustomer().getName()+
+                "\nDelivery Fee :" + getDeliveryFee()+
+                "\nTotal price :" + totalPrice+
+                "\nStatus :" + super.getInvoiceStatus()+
+                "\nPayment Type :" + getPaymentType();
     }
 
 }

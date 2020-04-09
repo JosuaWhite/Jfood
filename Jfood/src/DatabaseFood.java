@@ -3,66 +3,67 @@ import java.util.*;
 public class DatabaseFood
 {
 
-    public static ArrayList<Food> FOOD_DATABASE;
-    public static int lastId = 0;
+    private static ArrayList<Food> FOOD_DATABASE;
+    private static int lastId = 0;
 
-    public ArrayList<Food> getFoodDatabase()
+    public static ArrayList<Food> getFoodDatabase()
     {
         return FOOD_DATABASE;
     }
-
-    public int getLastId()
+    public static int getLastId()
     {
         return lastId;
     }
 
-    public Food getFoodById(int id)
+    public static Food getFoodById(int id) throws FoodNotFoundException
     {
-        if (FOOD_DATABASE.get(id)!=null) {
-            return FOOD_DATABASE.get(id);
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    public ArrayList<Food> getFoodBySeller(int SellerId)
-    {
-        ArrayList<Food> list = new ArrayList<>();
-        for (Food food : FOOD_DATABASE) {
-            if (food.getSeller().getId() == SellerId)
-            {
-                list.add(food);
+        for(Food food : FOOD_DATABASE) {
+            if(food.getId() == id) {
+                return food;
             }
         }
-        return list;
+        throw new FoodNotFoundException(id);
     }
 
-    public ArrayList<Food> getFoodByCategory(FoodCategory foodCategory)
+    public static ArrayList<Food> getFoodBySeller(int sellerId) throws  SellerNotFoundException
     {
-        ArrayList<Food> list = new ArrayList<>();
-        for (Food food : FOOD_DATABASE) {
-            if (food.getCategory() == foodCategory)
-            {
-                list.add(food);
+        ArrayList<Food> foodList = new ArrayList<Food>();
+        Seller seller = DatabaseSeller.getSellerById(sellerId);
+        for(Food food : FOOD_DATABASE) {
+            if(food.getSeller().equals(seller)) {
+                foodList.add(food);
             }
         }
-        return list;
+        return foodList;
     }
 
-    public boolean addSeller(Food food)
+    public static ArrayList<Food> getFoodByCategory(FoodCategory foodCategory)
     {
-        FOOD_DATABASE.add(lastId,food);
-        lastId++;
+        ArrayList<Food> foodList = new ArrayList<Food>();
+        for(Food food : FOOD_DATABASE) {
+            if(food.getCategory().equals(foodCategory)) {
+                foodList.add(food);
+            }
+        }
+        return foodList;
+    }
+
+    public static boolean addFood(Food food)
+    {
+        FOOD_DATABASE.add(food);
+        lastId=food.getId();
         return true;
     }
 
-    public boolean removeSeller(int id)
+    public static boolean removeFood(int id) throws FoodNotFoundException
     {
-        FOOD_DATABASE.remove(id);
-        lastId--;
-        return true;
+        for(Food food : FOOD_DATABASE) {
+            if(food.getId() == id) {
+                FOOD_DATABASE.remove(food);
+                return true;
+            }
+        }
+        throw new FoodNotFoundException(id);
     }
 
 }

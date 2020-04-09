@@ -2,46 +2,44 @@ import java.util.*;
 
 public class DatabaseSeller
 {
-    public ArrayList<Seller> SELLER_DATABASE;
-    public int lastId = 0;
+    private static ArrayList<Seller> SELLER_DATABASE;
+    private static int lastId = 0;
 
-
-    public DatabaseSeller() {
-    }
-
-    public ArrayList<Seller> getSellerDatabase()
+    public static ArrayList<Seller> getSellerDatabase()
     {
         return SELLER_DATABASE;
     }
-
-    public int getLastId()
+    public static int getLastId()
     {
         return lastId;
     }
 
-    public Seller getSellerById(int id)
+    public static Seller getSellerById(int id) throws SellerNotFoundException
     {
-        if (SELLER_DATABASE.get(id)!=null) {
-            return SELLER_DATABASE.get(id);
+        for(Seller seller : SELLER_DATABASE) {
+            if(seller.getId()==id) {
+                return seller;
+            }
         }
-        else
-        {
-            return null;
-        }
+        throw new SellerNotFoundException(id);
     }
 
-    public boolean addSeller(Seller seller)
+    public static boolean addSeller(Seller seller)
     {
-        SELLER_DATABASE.add(lastId,seller);
-        lastId++;
+        SELLER_DATABASE.add(seller);
+        lastId=seller.getId();
         return true;
     }
 
-    public boolean removeSeller(int id)
+    public static boolean removeSeller(int id) throws SellerNotFoundException
     {
-        SELLER_DATABASE.remove(id);
-        lastId--;
-        return true;
+        for(Seller seller : SELLER_DATABASE) {
+            if(seller.getId()==id) {
+                SELLER_DATABASE.remove(seller);
+                return true;
+            }
+        }
+        throw new SellerNotFoundException(id);
     }
 
 }

@@ -19,7 +19,7 @@ public class Food
         
     }
     
-    public int getid()
+    public int getId()
     {
         return id;
     }

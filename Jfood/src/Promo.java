@@ -18,51 +18,43 @@ public class Promo
         this.active = active;
     }
 
-    public int getid()
+    public int getId()
     {
         return id;
     }
-    
     public String getCode()
     {
         return code;
     }
-        
     public int getDiscount()
     {
         return discount;
     }
-        
     public int getMinPrice()
     {
         return minPrice;
     }
-    
     public boolean getActive()
     {
         return active;
     }
-    
+
     public void setId(int id)
     {
         this.id = id;
     }
-            
     public void setCode(String code)
     {
         this.code = code;
     }
-            
     public void setDiscount(int discount)
     {
         this.discount = discount;
     }
-    
     public void setMinPrice(int minPrice)
     {
         this.minPrice = minPrice;
     }
-    
     public void setActive(boolean active)
     {
         this.active = active;

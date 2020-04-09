@@ -18,27 +18,23 @@ public class Location
     {
         return province;
     }
-    
     public String getCity()
     {
         return city;
     }
-    
     public String getDescription()
     {
         return description;
     }
-    
+
     public void setProvince()
     {
         this.province = province;
     }
-    
     public void setCity()
     {
         this.city = city;
     }
-    
     public void setDescription()
     {
         this.description = description;

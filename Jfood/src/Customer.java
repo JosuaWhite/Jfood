@@ -15,30 +15,31 @@ public class Customer
     {
         this.id = id;
         this.name = name;
-        this.email = email;
-        this.password = password;
         this.joinDate = joinDate;
+        this.joinDate.add(Calendar.MONTH,-1);
+        setEmail(email);
+        setPassword(password);
     }
     
     public Customer(int id, String name, String email, String password, int year, int month, int day)
     {
         this.id = id;
         this.name = name;
-        this.email = email;
-        this.password = password;
-        this.joinDate = new GregorianCalendar(year,month,day);   
+        this.joinDate = new GregorianCalendar(year,month-1,day);
+        setEmail(email);
+        setPassword(password);
     }
     
     public Customer(int id, String name, String email, String password)
     {
         this.id = id;
         this.name = name;
-        this.email = email;
-        this.password = password;
-        this.joinDate = null;   
+        this.joinDate = Calendar.getInstance();
+        setEmail(email);
+        setPassword(password);
     }
 
-    public int getid()
+    public int getId()
     {
         return id;
     }
@@ -50,13 +51,11 @@ public class Customer
         
     public String getEmail()
     {
-        setEmail(email);
         return email;
     }
         
     public String getPassword()
     {
-        setPassword(password);
         return password;
     }
         
@@ -77,29 +76,34 @@ public class Customer
             
     public void setEmail(String email)
     {
-        Pattern p = Pattern.compile("^[a-zA-Z0-9&*_~]+(?:\\.[a-zA-Z0-9&*_~]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9-]+)*$");
+        String pattern =    "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                            "[a-zA-Z0-9_+&*-]+)*@" +
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                            "A-Z]{2,7}$";
+        Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(email);
-        if (m.matches()==true)
+        if (m.matches())
         {
             this.email = email;
         }
         else
         {
-            this.email = null;
+            this.email = "";
         }
     }
             
     public void setPassword(String password)
     {
-        Pattern p = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})");
+        String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$";
+        Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(email);
-        if (m.matches()==true)
+        if (m.matches())
         {
             this.password = password;
         }
         else
         {
-            this.password = null;
+            this.password = "";
         }
     }
         
@@ -113,29 +117,15 @@ public class Customer
         this.joinDate = new GregorianCalendar(year,month,day);
     }
     
-    public String toString()
-    {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");            
-        if(joinDate!=null)
-        {
-        return (
-        "==========CUSTOMER==========\n"+
-        "ID        : "+id+"\n"+
-        "Nama      : "+name+"\n"+
-        "Email     : "+email+"\n"+
-        "Password  : "+password+"\n"+
-        "Join date : "+sdf.format(getJoinDate().getTime())+"\n"
-        );
-    }
-    else
-    {
-        return(
-        "==========CUSTOMER==========\n"+
-        "ID        : "+id+"\n"+
-        "Nama      : "+name+"\n"+
-        "Email     : "+email+"\n"+
-        "Password  : "+password+"\n"
-        );
-    }
+    public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+        String date = sdf.format(getJoinDate().getTime());
+        return "===Customer==="+
+                "\nId: "+id+
+                "\nNama: "+name+
+                "\nEmail: "+email+
+                "\nJoinDate :"+date+
+                "\nPassword: "+password;
+
     }
 }

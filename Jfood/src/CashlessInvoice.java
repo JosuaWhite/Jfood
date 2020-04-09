@@ -17,7 +17,8 @@ public class CashlessInvoice extends Invoice
         super(id, foods,customer);
         this.promo = promo;
     }
-    
+
+    @Override
     public PaymentType getPaymentType()
     {
         return PAYMENT_TYPE;
@@ -37,42 +38,48 @@ public class CashlessInvoice extends Invoice
     public void setTotalPrice() {
         super.totalPrice = 0;
         for (Food foods : getFoods()) {
-            super.totalPrice = foods.getPrice();
+            super.totalPrice += foods.getPrice();
         }
 
-        if (promo != null && super.totalPrice >= promo.getMinPrice() && promo.getActive() == true) {
+        if (promo != null && super.totalPrice >= promo.getMinPrice() && promo.getActive()) {
             super.totalPrice -= promo.getDiscount();
         }
 
     }
 
+    @Override
     public String toString()
     {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
-        String date = sdf.format(getDate().getTime());
-        StringBuilder sss = new StringBuilder();
-
-        setTotalPrice();
-        if (promo != null && super.totalPrice >= promo.getMinPrice() && promo.getActive() == true)
+        String date = sdf.format(super.getDate().getTime());
+        String foods = "";
+        for(Food foodList : getFoods())
         {
-            sss.append("===============INVOICE===============\n" + "ID             : ").append(super.getid()).append("\n").append("Makanan        : \n");
-
-            for (Food foods : getFoods()) {
-                sss.append(foods.getName()).append(" ").append(foods.getPrice()).append("\n");
-            }
-            sss.append("Tanggal        : ").append(date).append("\n").append("Customer       : ").append(super.getCustomer().getName()).append("\n").append("Promo code     : ").append(promo.getCode()).append("\n").append("Diskon         : ").append(promo.getDiscount()).append("\n").append("Total          : ").append(totalPrice).append("\n").append("Status         : ").append(super.getInvoiceStatus().toString()).append("\n").append("Pay Type       : ").append(PAYMENT_TYPE.toString()).append("\n");
-            return sss.toString();
+            foods = foods + foodList.getName() + ", ";
         }
-        else
-        {
-            sss.append("===============INVOICE===============\n" + "ID             : ").append(super.getid()).append("\n").append("Makanan        : \n");
+        foods = foods.substring(0, foods.length() - 2);
 
-            for (Food foods : getFoods()) {
-                sss.append(foods.getName()).append(" ").append(foods.getPrice()).append("\n");
-            }
-            sss.append("Tanggal        : ").append(date).append("\n").append("Customer       : ").append(super.getCustomer().getName()).append("\n").append("Total          : ").append(totalPrice).append("\n").append("Status         : ").append(super.getInvoiceStatus().toString()).append("\n").append("Pay Type       : ").append(PAYMENT_TYPE.toString()).append("\n");
-            return sss.toString();
+        if(promo != null && promo.getActive()) {
+            return "============INVOICE CASHLESS============"+
+                    "\nID :" + super.getId()+
+                    "\nFoods :"  + foods+
+                    "\nDate :" + date+
+                    "\nCustomer :" + super.getCustomer().getName()+
+                    "\nPromo Code:" + promo.getCode()+
+                    "\nTotal price :" + totalPrice+
+                    "\nStatus :" + super.getInvoiceStatus()+
+                    "\nPayment Type :" + getPaymentType();
+        }else {
+            return "============INVOICE CASHLESS============"+
+                    "\nID :" + super.getId()+
+                    "\nFoods :"  + foods+
+                    "\nDate :" + date+
+                    "\nCustomer :" + super.getCustomer().getName()+
+                    "\nTotal price :" + totalPrice+
+                    "\nStatus :" + super.getInvoiceStatus()+
+                    "\nPayment Type :" + getPaymentType();
         }
+
     }
 
 

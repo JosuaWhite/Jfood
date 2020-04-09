@@ -2,19 +2,16 @@ public class JFood
 {
     public static void main(String[] args)
     {
-        Promo prom1 = new Promo(1,"RumahAja", 10000, 50000,true);
-        Promo prom2 = new Promo(2,"RumahAja", 20000, 100000,true);
-        DatabasePromo.addPromo(prom1);
-        DatabasePromo.addPromo(prom2);
-        for (Promo promo : DatabasePromo)
+        try {
+            DatabasePromo.addPromo(new Promo(DatabaseCustomer.getLastId() + 1, "HaleluyaFood", 10000, 50000, true));
+            DatabasePromo.addPromo(new Promo(DatabaseCustomer.getLastId() + 1, "HaleluyaFood", 20000, 80000, true));
+        }catch (PromoCodeAlreadyExistsException e)
         {
-            System.out.println(promo.toString());
+            System.out.println(e.getMessage());
         }
 
-
-
-
-        
+        // Exception in thread "main" java.lang.NullPointerException
+        //Tidak bisa try dan catch exception
     }
     
     

@@ -2,46 +2,49 @@ import java.util.*;
 
 public class DatabaseCustomer
 {
-    public ArrayList<Customer> CUSTOMER_DATABASE;
-    public int lastId = 0;
+    private static ArrayList<Customer> CUSTOMER_DATABASE;
+    private static int lastId = 0;
 
-
-    public DatabaseCustomer() {
-    }
-
-    public ArrayList<Customer> getCustomerDatabase()
+    public static ArrayList<Customer> getCustomerDatabase()
     {
         return CUSTOMER_DATABASE;
     }
-
-    public int getLastId()
+    public static int getLastId()
     {
         return lastId;
     }
 
-    public Customer getCustomerById(int id)
+    public static Customer getCustomerById(int id) throws CustomerNotFoundException
     {
-        if (CUSTOMER_DATABASE.get(id)!=null) {
-            return CUSTOMER_DATABASE.get(id);
+        for(Customer customer : CUSTOMER_DATABASE) {
+            if(customer.getId() == id) {
+                return customer;
+            }
         }
-        else
-        {
-            return null;
-        }
+        throw new CustomerNotFoundException(id);
     }
 
-    public boolean addCustomer(Customer customer)
+    public static boolean addCustomer(Customer customer) throws EmailAlreadyExistsException
     {
-        CUSTOMER_DATABASE.add(lastId,customer);
-        lastId++;
+        for (Customer _customer : CUSTOMER_DATABASE) {
+            if(_customer.getEmail().equals(customer.getEmail())) {
+                throw new EmailAlreadyExistsException(customer);
+            }
+        }
+        CUSTOMER_DATABASE.add(customer);
+        lastId = customer.getId();
         return true;
     }
 
-    public boolean removeCustomer(int id)
+    public static boolean removeCustomer(int id) throws CustomerNotFoundException
     {
-        CUSTOMER_DATABASE.remove(id);
-        lastId--;
-        return true;
+        for(Customer customer : CUSTOMER_DATABASE) {
+            if(customer.getId() == id) {
+                CUSTOMER_DATABASE.remove(customer);
+                return true;
+            }
+        }
+        throw new CustomerNotFoundException(id);
     }
     
 }
